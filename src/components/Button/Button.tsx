@@ -1,4 +1,5 @@
 import {FC, ReactNode} from 'react';
+import './Button.scss'
 
 interface ButtonProps {
   children: ReactNode;
@@ -6,6 +7,6 @@ interface ButtonProps {
 }
 
 const Button: FC<ButtonProps> = ({children, onClick}) => 
-<button onClick={() => onClick && onClick()}>{children}</button>;
+<button className= 'button' onClick={() => onClick && onClick()}>{children}</button>;
 
 export default Button;

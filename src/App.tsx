@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './App.css';
+import './App.scss';
 import TextInput from './components/TextInput/TextInput';
 import Button from './components/Button/Button';
 
