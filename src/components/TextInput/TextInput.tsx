@@ -8,7 +8,12 @@ interface TextInputProps {
 
 }
 const TextInput = ({value, type, onChange}: TextInputProps) =>
- <input className= 'input' value={value} type={type} onChange={(event) => onChange && onChange(event)}/>;
+ <input 
+ className= 'input' 
+ value={value} 
+ type={type} 
+ onChange={(event) => onChange && onChange(event)}
+ />;
 
 
 export default TextInput;

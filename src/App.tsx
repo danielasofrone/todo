@@ -3,6 +3,7 @@ import './App.scss';
 import TextInput from './components/TextInput/TextInput';
 import Button from './components/Button/Button';
 import ListItem from './components/ListItem/ListItem'
+import plusIcon from './assets/plusIcon.svg'
 
 interface Entry {
   title: string;
@@ -54,17 +55,20 @@ function App() {
 
   return (
     <div className='wrapper'>
-    <h1> Value is {inputValue}</h1>
-     <TextInput value={inputValue} type="text" onChange={(event) => setInputValue(event?.target.value)}/>
-     <br/>
-     <br/>
-     <Button onClick={handleSaveEntry}>Save entry</Button>
-     <br/>
-     <br/>
-     <br/>
-     <br/>
-      {entries.length !== 0 ?
-      <ul>
+      <div className= 'user-input'>
+        <div className= 'add-task'>
+          <img src={plusIcon} alt="plus-icon" />
+          <div className= 'input-title'> Add task</div>
+          <TextInput 
+            value={inputValue} 
+            type="text" 
+            onChange={(event) => setInputValue(event?.target.value)}
+          />
+        </div>
+          <Button onClick={handleSaveEntry}>Save entry</Button>
+      </div>
+          {entries.length !== 0 ?
+        <ul>
        {entries.map((entry, index)  =>  
        <ListItem 
        index={index}
