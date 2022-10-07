@@ -2,10 +2,18 @@
   padding: 10px;
   background-color:#61C8AD;
   color: #ecf6e8;
+  font-family: 'Roboto', sans-serif;
   font-size: 20px;
   cursor: pointer;
   text-align: center;
   margin: 40px auto;
   border: none;
   border-radius: 10px;
+  &:hover,
+    &:focus {
+      transform: scale3d(1.05, 1.05, 1);
+      &::after {
+        opacity: 1;
+      }
+    }
 }

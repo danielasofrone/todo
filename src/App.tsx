@@ -30,7 +30,6 @@ function App() {
    ));
 
    setInputValue("");
-   window.localStorage.setItem('entries', JSON.stringify(entries));
   };
 
   const handleCompletedToggle = (itemIndex: number) => {
@@ -45,13 +44,33 @@ function App() {
     window.localStorage.setItem('entries', JSON.stringify(entries));
   };
 
+  const handleDeleteItem = (itemIndex: number) => {
+    const updatedEntries = entries.filter((item, index) =>
+     index !== itemIndex)
+     setEntry(updatedEntries)
+
+     if (updatedEntries.length === 0) {
+      window.localStorage.removeItem('entries')
+     }
+  }
+
+  const handleEditItem = (itemIndex: number) => {
+    console.log('edit item', itemIndex)
+  }
+
   useEffect(() => {
-   const localEntries = window.localStorage.getItem('entries');
-    if(localEntries) {
-      const parsedEntries = JSON.parse(localEntries);
-      setEntry(parsedEntries)
-    }
-  },[]);
+    const localEntries = window.localStorage.getItem('entries');
+     if(localEntries) {
+       const parsedEntries = JSON.parse(localEntries);
+       setEntry(parsedEntries);
+     }
+   },[]);
+
+  useEffect(() => {
+     if(entries.length > 0) {
+      window.localStorage.setItem('entries', JSON.stringify(entries));
+     }
+   },[entries]);
 
   return (
     <div className='wrapper'>
@@ -59,9 +78,9 @@ function App() {
         <div className= 'add-task'>
           <img src={plusIcon} alt="plus-icon" />
           <div className= 'input-title'> Add task</div>
-          <TextInput 
-            value={inputValue} 
-            type="text" 
+          <TextInput
+            value={inputValue}
+            type="text"
             onChange={(event) => setInputValue(event?.target.value)}
           />
         </div>
@@ -69,13 +88,16 @@ function App() {
       </div>
           {entries.length !== 0 ?
         <ul>
-       {entries.map((entry, index)  =>  
-       <ListItem 
+       {entries.map((entry, index)  =>
+       <ListItem
        index={index}
        toggleCompleted={(itemIndex) => handleCompletedToggle(itemIndex)}
        completed= {entry.completed}
-       key= {`${index}_${entry.title}`} 
-       title={entry.title}/>)}
+       key= {`${index}_${entry.title}`}
+       title={entry.title}
+       editItem={(itemIndex) => handleEditItem(itemIndex)}
+       deleteItem={(itemIndex) => handleDeleteItem(itemIndex)}
+       />)}
        </ul>
         :
        <p>No Entries yet</p>
