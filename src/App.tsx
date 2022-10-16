@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './App.scss';
 import TextInput from './components/TextInput/TextInput';
 import Button from './components/Button/Button';
-import ListItem from './components/ListItem/ListItem'
+import List from './components/List/List'
 import plusIcon from './assets/plusIcon.svg'
 
 interface Entry {
@@ -54,8 +54,16 @@ function App() {
      }
   }
 
-  const handleEditItem = (itemIndex: number) => {
-    console.log('edit item', itemIndex)
+  const handleEditItem = (itemIndex: number, newTitle: string) => {
+    const modifiedState = entries.map((entry, index) => {
+      if (index === itemIndex) {
+        entry.title = newTitle
+        return entry;
+      }
+      return entry;
+    })
+    setEntry(modifiedState);
+    window.localStorage.setItem('entries', JSON.stringify(entries));
   }
 
   useEffect(() => {
@@ -88,16 +96,12 @@ function App() {
       </div>
           {entries.length !== 0 ?
         <ul>
-       {entries.map((entry, index)  =>
-       <ListItem
-       index={index}
-       toggleCompleted={(itemIndex) => handleCompletedToggle(itemIndex)}
-       completed= {entry.completed}
-       key= {`${index}_${entry.title}`}
-       title={entry.title}
-       editItem={(itemIndex) => handleEditItem(itemIndex)}
-       deleteItem={(itemIndex) => handleDeleteItem(itemIndex)}
-       />)}
+       <List
+       entries={entries}
+       handleCompletedToggle={(itemIndex) => handleCompletedToggle(itemIndex)}
+       handleEditItem={(itemIndex, newTitle) => handleEditItem(itemIndex, newTitle)}
+       handleDeleteItem={(itemIndex) => handleDeleteItem(itemIndex)}
+       />
        </ul>
         :
        <p>No Entries yet</p>

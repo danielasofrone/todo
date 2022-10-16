@@ -4,8 +4,11 @@
 }
 
 .item-wrapper {
+  display: flex;
+  flex-direction: row;
   min-height: 50px;
   line-height: 50px;
+  min-width: 500px;
   list-style: none;
   margin:  10px 0;
   border-radius: 2px;
@@ -16,9 +19,39 @@
   font-family: 'Roboto', sans-serif;
   font-size: 20px;
   text-align: left;
-  flex-grow: 5;
   input {
     margin-right: 7px;
   }
 
+}
+
+.text-wrapper {
+  width: 400px;
+  line-break: auto;
+}
+
+.buttons-container {
+  float: right;
+
+}
+
+.button {
+  width: 65px;
+  padding: 8px;
+  background-color:#2b473d;
+  color: #ecf6e8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: center;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  &:hover,
+    &:focus {
+      transform: scale3d(1.05, 1.05, 1);
+      &::after {
+        opacity: 1;
+      }
+    }
 }
