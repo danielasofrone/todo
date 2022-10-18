@@ -1,28 +1,35 @@
 import React, {useState, useEffect} from 'react';
 import './App.scss';
-import TextInput from './components/TextInput/TextInput';
+import Textarea from './components/Textarea/Textarea';
 import Button from './components/Button/Button';
 import List from './components/List/List'
 import plusIcon from './assets/plusIcon.svg'
 
-interface Entry {
+export interface Entry {
+  id: number;
   title: string;
   completed?: boolean;
 }
 
+export type Filter = 'all' | 'completed' | 'incomplete'
+
 function App() {
   const [inputValue, setInputValue] = useState<string>("")
   const [entries, setEntry] = useState<Entry[]>([])
+  const [filter, setFilter] = useState<Filter>('all')
 
 
   const handleSaveEntry = () => {
     if (inputValue.trim() === '') {
       return
     }
+    const id = Math.floor(Math.random() * 999)
+
    setEntry(prevState => (
    [
     ...prevState,
     {
+      id,
       title: inputValue,
       completed: false
     }
@@ -32,9 +39,9 @@ function App() {
    setInputValue("");
   };
 
-  const handleCompletedToggle = (itemIndex: number) => {
-    const modifiedState = entries.map((entry, index) => {
-      if (index === itemIndex) {
+  const handleCompletedToggle = (id: number) => {
+    const modifiedState = entries.map((entry) => {
+      if (entry.id === id) {
         entry.completed = !entry.completed
         return entry;
       }
@@ -44,9 +51,9 @@ function App() {
     window.localStorage.setItem('entries', JSON.stringify(entries));
   };
 
-  const handleDeleteItem = (itemIndex: number) => {
-    const updatedEntries = entries.filter((item, index) =>
-     index !== itemIndex)
+  const handleDeleteItem = (id: number) => {
+    const updatedEntries = entries.filter((item) =>
+     item.id !== id)
      setEntry(updatedEntries)
 
      if (updatedEntries.length === 0) {
@@ -54,9 +61,9 @@ function App() {
      }
   }
 
-  const handleEditItem = (itemIndex: number, newTitle: string) => {
-    const modifiedState = entries.map((entry, index) => {
-      if (index === itemIndex) {
+  const handleEditItem = (id: number, newTitle: string) => {
+    const modifiedState = entries.map((entry) => {
+      if (id === entry.id) {
         entry.title = newTitle
         return entry;
       }
@@ -86,23 +93,56 @@ function App() {
         <div className= 'add-task'>
           <img src={plusIcon} alt="plus-icon" />
           <div className= 'input-title'> Add task</div>
-          <TextInput
+          <Textarea
             value={inputValue}
-            type="text"
             onChange={(event) => setInputValue(event?.target.value)}
           />
         </div>
-          <Button onClick={handleSaveEntry}>Save entry</Button>
+          <Button 
+          onClick={handleSaveEntry}
+          >Save entry</Button>
       </div>
           {entries.length !== 0 ?
-        <ul>
+        <div className='list-item'>
+          <p>Filter</p>
+          <label htmlFor='all'>
+            <input 
+            type='radio' 
+            name='filter' 
+            value='all' 
+            id='all' 
+            checked={filter === 'all'}
+            onChange={() => setFilter('all')}
+            /> display all
+          </label>
+          <label htmlFor='completed'>
+            <input 
+            type='radio' 
+            name='filter'
+            value='all' 
+            id='completed'
+            checked={filter === 'completed'}
+            onChange={() => setFilter('completed')}
+            /> display completed
+          </label>
+          <label htmlFor='incomplete'>
+            <input 
+            type='radio' 
+            name='filter'
+            value='all' 
+            id='incomplete'
+            checked={filter === 'incomplete'}
+            onChange={() => setFilter('incomplete')}
+            /> display incomplete
+          </label>
        <List
+       filter={filter}
        entries={entries}
-       handleCompletedToggle={(itemIndex) => handleCompletedToggle(itemIndex)}
-       handleEditItem={(itemIndex, newTitle) => handleEditItem(itemIndex, newTitle)}
-       handleDeleteItem={(itemIndex) => handleDeleteItem(itemIndex)}
+       handleCompletedToggle={(id) => handleCompletedToggle(id)}
+       handleEditItem={(id, newTitle) => handleEditItem(id, newTitle)}
+       handleDeleteItem={(id) => handleDeleteItem(id)}
        />
-       </ul>
+       </div>
         :
        <p>No Entries yet</p>
       }

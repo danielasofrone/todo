@@ -1,21 +1,21 @@
 import './ListItem.scss';
 import {useState} from 'react';
-import TextInput from '../TextInput/TextInput'
+import Textarea from '../Textarea/Textarea'
 
 interface ListItemProps {
   title: string;
   completed?: boolean;
-  toggleCompleted: (index: number) => void;
-  deleteItem: (index: number) => void
-  editItem: (index: number, title: string) => void
-  index: number;
+  toggleCompleted: (id: number) => void;
+  deleteItem: (id: number) => void
+  editItem: (title: string) => void
+  id: number;
 }
 
 const ListItem = ({
   title,
   completed,
   toggleCompleted,
-  index,
+  id,
   deleteItem,
   editItem
 }: ListItemProps) => {
@@ -27,36 +27,36 @@ const ListItem = ({
       setInputValue(title);
     }
     const handleSave = () => {
-     editItem(index, inputValue);
+     editItem(inputValue);
      setEditing(false);
     };
 
     return(
   <div className="item-wrapper">
-    <li className={completed ? 'completed' : ''}>
+    <div className={completed ? 'completed' : ''}>
       {!isEditing ? (
         <>
       <input
         type="checkbox"
         checked={completed}
-        onChange={() => toggleCompleted(index)}
+        onChange={() => toggleCompleted(id)}
       /> {' '}
       {title}
-      <div className='buttons-wrapper'>
-      <button className= "button" onClick={() => deleteItem(index)}>Delete</button>
-      <button className= "button" onClick={() => setEditing(true)}>Edit</button>
+        <div className='buttons-wrapper'>
+          <button className= "button" onClick={() => deleteItem(id)}>Delete</button>
+          <button className= "button" onClick={() => setEditing(true)}>Edit</button>
       </div>
       </>
       ): (
         <>
-      <TextInput value={inputValue} onChange={(event) => setInputValue(event.target.value)} />
-      <div className='buttons-wrapper'>
-      <button className= "button" onClick={() => handleSave()}>Save</button>
-      <button className= "button" onClick={() => handleCancel()}>Cancel</button>
+      <Textarea value={inputValue} onChange={(event) => setInputValue(event.target.value)} />
+        <div className='buttons-wrapper'>
+          <button className= "button" onClick={() => handleSave()}>Save</button>
+          <button className= "button" onClick={() => handleCancel()}>Cancel</button>
       </div>
       </>
       )}
-    </li>
+    </div>
     </div>
   )
 };
