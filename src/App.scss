@@ -45,6 +45,18 @@
 
 .list-item {
   display: block;
-  margin: 5px 100px;
+  margin: 10px 100px;
+  padding: 50px;
+}
 
+label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.filters {
+  margin: 30px 0;
+  display: flex;
+  justify-content: space-between;
 }

@@ -98,43 +98,47 @@ function App() {
             onChange={(event) => setInputValue(event?.target.value)}
           />
         </div>
-          <Button 
+          <Button
           onClick={handleSaveEntry}
           >Save entry</Button>
       </div>
-          {entries.length !== 0 ?
+          {entries.length !== 0 &&
         <div className='list-item'>
-          <p>Filter</p>
-          <label htmlFor='all'>
-            <input 
-            type='radio' 
-            name='filter' 
-            value='all' 
-            id='all' 
-            checked={filter === 'all'}
-            onChange={() => setFilter('all')}
-            /> display all
+          <div className='filters'>
+            <label htmlFor='all'>
+              <input
+              className='filter-item'
+              type='radio'
+              name='filter'
+              value='all'
+              id='all'
+              checked={filter === 'all'}
+              onChange={() => setFilter('all')}
+              /> Display all
+            </label>
+            <label htmlFor='completed'>
+              <input
+              className='filter-item'
+              type='radio'
+              name='filter'
+              value='all'
+              id='completed'
+              checked={filter === 'completed'}
+              onChange={() => setFilter('completed')}
+              /> Display completed
+           </label>
+            <label htmlFor='incomplete'>
+              <input
+              className='filter-item'
+              type='radio'
+              name='filter'
+              value='all'
+              id='incomplete'
+              checked={filter === 'incomplete'}
+              onChange={() => setFilter('incomplete')}
+              /> Display incomplete
           </label>
-          <label htmlFor='completed'>
-            <input 
-            type='radio' 
-            name='filter'
-            value='all' 
-            id='completed'
-            checked={filter === 'completed'}
-            onChange={() => setFilter('completed')}
-            /> display completed
-          </label>
-          <label htmlFor='incomplete'>
-            <input 
-            type='radio' 
-            name='filter'
-            value='all' 
-            id='incomplete'
-            checked={filter === 'incomplete'}
-            onChange={() => setFilter('incomplete')}
-            /> display incomplete
-          </label>
+        </div>
        <List
        filter={filter}
        entries={entries}
@@ -143,8 +147,6 @@ function App() {
        handleDeleteItem={(id) => handleDeleteItem(id)}
        />
        </div>
-        :
-       <p>No Entries yet</p>
       }
      </div>
   );

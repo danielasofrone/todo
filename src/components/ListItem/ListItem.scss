@@ -6,8 +6,8 @@
 .item-wrapper {
   display: flex;
   flex-direction: row;
-  min-height: 50px;
-  line-height: 50px;
+  min-height: 35px;
+  line-height: 35px;
   min-width: 400px;
   list-style: none;
   margin:  10px 0;
@@ -17,7 +17,7 @@
   background-color: #ffffff;
   padding: 10px;
   font-family: 'Roboto', sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   text-align: left;
   input {
     margin-right: 7px;
@@ -26,8 +26,9 @@
 }
 
 .text-wrapper {
-  width: 400px;
-  line-break: auto;
+  inline-size: 400px;
+  overflow-wrap: break-word;
+  padding-right: 15px;
 }
 
 .buttons-container {
@@ -41,7 +42,7 @@
   background-color:#2b473d;
   color: #ecf6e8;
   font-family: 'Roboto', sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   cursor: pointer;
   text-align: center;
   margin: 0 10px;
@@ -54,4 +55,8 @@
         opacity: 1;
       }
     }
+}
+
+.checkbox-input {
+  height: 30px;
 }

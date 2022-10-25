@@ -31,20 +31,24 @@ const ListItem = ({
      setEditing(false);
     };
 
-    return(
+    return (
   <div className="item-wrapper">
-    <div className={completed ? 'completed' : ''}>
       {!isEditing ? (
         <>
       <input
+        className='checkbox-input'
         type="checkbox"
         checked={completed}
         onChange={() => toggleCompleted(id)}
       /> {' '}
+      <div className={completed ? 'completed' : ''}>
+      <div className='text-wrapper'>
       {title}
+      </div>
+      </div>
         <div className='buttons-wrapper'>
-          <button className= "button" onClick={() => deleteItem(id)}>Delete</button>
           <button className= "button" onClick={() => setEditing(true)}>Edit</button>
+          <button className= "button" onClick={() => deleteItem(id)}>Delete</button>
       </div>
       </>
       ): (
@@ -56,7 +60,6 @@ const ListItem = ({
       </div>
       </>
       )}
-    </div>
     </div>
   )
 };

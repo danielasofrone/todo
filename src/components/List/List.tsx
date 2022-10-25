@@ -36,7 +36,7 @@ const List = ({
   return (
     <>
     {filteredEntries.length !== 0 ? (
-      <div className="individual-item">
+      <div>
         {filteredEntries.map((entry, index) => (
           <ListItem
             id={entry.id}
