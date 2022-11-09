@@ -15,7 +15,7 @@
   border: 1px solid #e6e6e6;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.11);
   background-color: #ffffff;
-  padding: 10px;
+  padding: 15px;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
   text-align: left;
@@ -59,4 +59,13 @@
 
 .checkbox-input {
   height: 30px;
+}
+
+.due-date {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid #2b473d;
+  margin-left: 10px;
 }

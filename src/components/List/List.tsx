@@ -8,7 +8,7 @@ interface ListProps {
   handleCompletedToggle: (id: number) => void
   handleEditItem: (id: number, title: string) => void
   handleDeleteItem: (id: number) => void
-
+  handleSetDueDate: (id: number, dueDate: string) => void
 }
 
 const List = ({
@@ -17,6 +17,7 @@ const List = ({
   handleEditItem,
   handleDeleteItem,
   filter,
+  handleSetDueDate
 
 }: ListProps) => {
     const [filteredEntries, setFilteredEntries]= useState<Entry[]>(entries)
@@ -39,13 +40,14 @@ const List = ({
       <div>
         {filteredEntries.map((entry, index) => (
           <ListItem
-            id={entry.id}
+            dueDate={entry.dueDate}
             completed= {entry.completed}
             key= {`${index}_${entry.title}`}
             title={entry.title}
             toggleCompleted={() => handleCompletedToggle(entry.id)}
             editItem={(newTitle) => handleEditItem(entry.id, newTitle)}
             deleteItem={() => handleDeleteItem(entry.id)} 
+            setDueDate={(dueDate) => handleSetDueDate(entry.id, dueDate) }
           />
         ))}
       </div>

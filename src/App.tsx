@@ -9,6 +9,8 @@ export interface Entry {
   id: number;
   title: string;
   completed?: boolean;
+  dueDate?: string;
+
 }
 
 export type Filter = 'all' | 'completed' | 'incomplete'
@@ -71,6 +73,17 @@ function App() {
     })
     setEntry(modifiedState);
     window.localStorage.setItem('entries', JSON.stringify(entries));
+  }
+
+  const handleSetDueDate = (id: number, dueDate: string) => {
+    const modifiedState = entries.map((entry) => {
+      if (id === entry.id) {
+        entry.dueDate = dueDate
+        return entry;
+      }
+      return entry;
+    })
+    setEntry(modifiedState);
   }
 
   useEffect(() => {
@@ -140,11 +153,12 @@ function App() {
           </label>
         </div>
        <List
-       filter={filter}
-       entries={entries}
-       handleCompletedToggle={(id) => handleCompletedToggle(id)}
-       handleEditItem={(id, newTitle) => handleEditItem(id, newTitle)}
-       handleDeleteItem={(id) => handleDeleteItem(id)}
+        filter={filter}
+        entries={entries}
+        handleCompletedToggle={(id) => handleCompletedToggle(id)}
+        handleEditItem={(id, newTitle) => handleEditItem(id, newTitle)}
+        handleDeleteItem={(id) => handleDeleteItem(id)}
+        handleSetDueDate={(id, dueDate) => handleSetDueDate(id, dueDate)}
        />
        </div>
       }
