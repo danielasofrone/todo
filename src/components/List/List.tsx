@@ -1,10 +1,12 @@
 import ListItem from "../ListItem/ListItem"
-import {Entry, Filter} from '../../App'
+import {Filter} from '../../App'
 import {useState, useEffect} from 'react'
+import {connect} from 'react-redux';
+import {Todo} from '../../redux/reducers/toDoReducer/types'
 
 interface ListProps {
+  todos: Todo[]
   filter: Filter
-  entries: Entry[];
   handleCompletedToggle: (id: number) => void
   handleEditItem: (id: number, title: string) => void
   handleDeleteItem: (id: number) => void
@@ -12,27 +14,27 @@ interface ListProps {
 }
 
 const List = ({
-  entries,
   handleCompletedToggle,
   handleEditItem,
   handleDeleteItem,
   filter,
-  handleSetDueDate
-
+  handleSetDueDate,
+  todos
 }: ListProps) => {
-    const [filteredEntries, setFilteredEntries]= useState<Entry[]>(entries)
+    const [filteredEntries, setFilteredEntries]= useState<Todo[]>(todos)
 
+    console.log('Todos are here', todos)
     useEffect(() => {
-      let newEntries = entries;
+      let newTodos = todos;
 
       if (filter === 'completed') {
-        newEntries = entries.filter((entry) => entry.completed === true)
+        newTodos = todos.filter((todo) => todo.completed === true)
       } else if (filter === 'incomplete' ) {
-        newEntries = entries.filter((entry) => entry.completed === false)
+        newTodos = todos.filter((todo) => todo.completed === false)
       }
-      setFilteredEntries(newEntries)
+      setFilteredEntries(newTodos)
     }, 
-    [filter, entries])
+    [filter, todos])
 
   return (
     <>
@@ -58,7 +60,11 @@ const List = ({
   )
 }
 
-export default List;
+const mapStateToProps = (state: any) => ({
+  todos: state.todos,
+});
+
+export default connect(mapStateToProps)(List);
 
 
 

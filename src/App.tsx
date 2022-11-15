@@ -2,8 +2,12 @@ import React, {useState, useEffect} from 'react';
 import './App.scss';
 import Textarea from './components/Textarea/Textarea';
 import Button from './components/Button/Button';
-import List from './components/List/List'
-import plusIcon from './assets/plusIcon.svg'
+import List from './components/List/List';
+import plusIcon from './assets/plusIcon.svg';
+import {connect} from 'react-redux';
+import { addTodo } from './redux/actions/todosActios';
+import {Todo} from './redux/reducers/toDoReducer/types';
+import {AnyAction} from 'redux';
 
 export interface Entry {
   id: number;
@@ -15,7 +19,11 @@ export interface Entry {
 
 export type Filter = 'all' | 'completed' | 'incomplete'
 
-function App() {
+interface AppProps {
+  todos?: Todo[]
+  onAddTodo?: (todo: Todo) => AnyAction
+}
+function App({todos, onAddTodo}: AppProps) {
   const [inputValue, setInputValue] = useState<string>("")
   const [entries, setEntry] = useState<Entry[]>([])
   const [filter, setFilter] = useState<Filter>('all')
@@ -27,19 +35,16 @@ function App() {
     }
     const id = Math.floor(Math.random() * 999)
 
-   setEntry(prevState => (
-   [
-    ...prevState,
-    {
-      id,
-      title: inputValue,
-      completed: false
-    }
-   ]
-   ));
+    if (onAddTodo) {
+       onAddTodo({
+          id,
+          title: inputValue,
+          completed: false
+        })
+      }
+      setInputValue("");
+   }
 
-   setInputValue("");
-  };
 
   const handleCompletedToggle = (id: number) => {
     const modifiedState = entries.map((entry) => {
@@ -154,7 +159,6 @@ function App() {
         </div>
        <List
         filter={filter}
-        entries={entries}
         handleCompletedToggle={(id) => handleCompletedToggle(id)}
         handleEditItem={(id, newTitle) => handleEditItem(id, newTitle)}
         handleDeleteItem={(id) => handleDeleteItem(id)}
@@ -166,4 +170,12 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state: any) => ({
+  todos: state.todos,
+});
+
+const mapDispatchToProps = {
+  onAddTodo: (todo: Todo) => addTodo(todo)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
