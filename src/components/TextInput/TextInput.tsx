@@ -1,12 +1,13 @@
-import {ChangeEvent} from 'react';
+import { ChangeEvent } from 'react';
 import './TextInput.scss';
 
 interface TextInputProps {
   value?: string;
   type?: 'text';
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onKeyUp?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
-const TextInput = ({value, type, onChange}: TextInputProps) => (
+const TextInput = ({ value, type, onChange }: TextInputProps) => (
   <input
     className="input"
     value={value}
