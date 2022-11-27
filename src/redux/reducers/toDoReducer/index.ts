@@ -1,11 +1,13 @@
 import { todoConstants } from '../../constants/todosConstants';
 import { Todo } from './types';
+import { AnyAction } from 'redux';
+
 const localTodos = window.localStorage.getItem('todos');
 const parsedTodos = localTodos ? JSON.parse(localTodos) : [];
 
 const initialState: Todo[] = parsedTodos;
 
-export default function todos(state = initialState, action: any) {
+export default function todos(state = initialState, action: AnyAction) {
   switch (action.type) {
     case todoConstants.ADD_TODO: {
       const newTodos = [...state, action.todo];

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.scss';
+import Statistics from './components/Statistics/Statistics';
 import Textarea from './components/Textarea/Textarea';
 import Button from './components/Button/Button';
 import List from './components/List/List';
@@ -14,13 +15,6 @@ import {
 } from './redux/actions/todosActios';
 import { Todo } from './redux/reducers/toDoReducer/types';
 import { AnyAction } from 'redux';
-
-export interface Entry {
-  id: number;
-  title: string;
-  completed?: boolean;
-  dueDate?: string;
-}
 
 export type Filter = 'all' | 'completed' | 'incomplete';
 
@@ -142,6 +136,8 @@ function App({
         </div>
         <Button onClick={handleSaveEntry}>Save entry</Button>
       </div>
+      <hr />
+      <Statistics />
       {todos && todos.length > 0 && (
         <div className="list-item">
           <div className="filters">
