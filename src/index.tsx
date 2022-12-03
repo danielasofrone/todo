@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
-import App from './App';
+// import App from './App';
+import Login from '../src/pages/Login/Login';
 import reportWebVitals from './reportWebVitals';
-import { legacy_createStore as createStore, compose} from 'redux'
-import reducers from '../src/redux/reducers'
-import {Provider} from 'react-redux'
+import { legacy_createStore as createStore, compose } from 'redux';
+import reducers from '../src/redux/reducers';
+import { Provider } from 'react-redux';
 
 declare global {
   interface Window {
@@ -23,7 +24,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-    <App />
+      <Login />
+      {/* <App /> */}
     </Provider>
   </React.StrictMode>
 );

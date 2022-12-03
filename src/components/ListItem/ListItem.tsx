@@ -1,5 +1,5 @@
 import './ListItem.scss';
-import {ChangeEvent, useState} from 'react';
+import { ChangeEvent, useState } from 'react';
 import Textarea from '../Textarea/Textarea';
 
 interface ListItemProps {
@@ -22,7 +22,7 @@ const ListItem = ({
   dueDate,
 }: ListItemProps) => {
   const [isEditing, setEditing] = useState(false);
-  const [inputValue, setInputValue] = useState <string>(title);
+  const [inputValue, setInputValue] = useState<string>(title);
   const [dueDateValue, setDueDateValue] = useState<string | undefined>(dueDate);
 
   const handleChangeDueDate = (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +52,7 @@ const ListItem = ({
           <div className={completed ? 'completed' : ''}>
             <div className="text-wrapper">{title}</div>
           </div>
-          <div className="buttons-wrapper">
+          <div className="buttons-container">
             <button className="button" onClick={() => setEditing(true)}>
               Edit
             </button>
@@ -60,7 +60,7 @@ const ListItem = ({
               Delete
             </button>
             <input
-            className="due-date"
+              className="due-date"
               type="date"
               value={dueDateValue}
               onChange={(e) => handleChangeDueDate(e)}
@@ -73,7 +73,7 @@ const ListItem = ({
             value={inputValue}
             onChange={(event) => setInputValue(event.target.value)}
           />
-          <div className="buttons-wrapper">
+          <div className="buttons-container">
             <button className="button" onClick={() => handleSave()}>
               Save
             </button>

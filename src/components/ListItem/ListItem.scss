@@ -1,3 +1,5 @@
+@import 'breakpoints';
+
 .completed {
   text-decoration: line-through;
 
@@ -33,6 +35,9 @@
 
 .buttons-container {
   float: right;
+  @include sm {
+    
+  }
 
 }
 
