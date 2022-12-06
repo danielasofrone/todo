@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
-// import App from './App';
-import Login from '../src/pages/Login/Login';
+import App from './App';
+// import Login from '../src/pages/Login/Login';
 import reportWebVitals from './reportWebVitals';
 import { legacy_createStore as createStore, compose } from 'redux';
 import reducers from '../src/redux/reducers';
@@ -24,8 +24,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Login />
-      {/* <App /> */}
+      {/* <Login /> */}
+      <App />
     </Provider>
   </React.StrictMode>
 );
