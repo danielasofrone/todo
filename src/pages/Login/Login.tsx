@@ -1,15 +1,11 @@
-import { getAuth, signInWithRedirect, GithubAuthProvider } from 'firebase/auth';
-import { app } from '../../firebase.config';
-const provider = new GithubAuthProvider();
-
-app();
-const auth = getAuth();
+import { signInWithRedirect } from 'firebase/auth';
+import { auth, gitHubProvider } from '../../firebase';
 
 const Login = () => {
   return (
     <>
       <h1>Login</h1>
-      <button onClick={() => signInWithRedirect(auth, provider)}>
+      <button onClick={() => signInWithRedirect(auth, gitHubProvider)}>
         Login with GitHub
       </button>
     </>

@@ -6,6 +6,7 @@ import Button from './components/Button/Button';
 import List from './components/List/List';
 import plusIcon from './assets/plusIcon.svg';
 import { connect } from 'react-redux';
+import Header from '../src/components/Header/Header';
 import {
   addTodo,
   toggleTodo,
@@ -124,6 +125,7 @@ function App({
 
   return (
     <div className="wrapper">
+      <Header />
       <div className="user-input">
         <div className="add-task">
           <img src={plusIcon} alt="plus-icon" />
