@@ -124,72 +124,74 @@ function App({
   };
 
   return (
-    <div className="wrapper">
-      <Header />
-      <div className="user-input">
-        <div className="add-task">
-          <img src={plusIcon} alt="plus-icon" />
-          <div className="input-title"> Add task</div>
-          <Textarea
-            value={inputValue}
-            onChange={(event) => setInputValue(event?.target.value)}
-            onKeyUp={(event) => handleSaveEntryOnEnter(event)}
-          />
-        </div>
-        <Button onClick={handleSaveEntry}>Save entry</Button>
-      </div>
-      <hr />
-      <Statistics />
-      {todos && todos.length > 0 && (
-        <div className="list-item">
-          <div className="filters">
-            <label htmlFor="all">
-              <input
-                className="filter-item"
-                type="radio"
-                name="filter"
-                value="all"
-                id="all"
-                checked={filter === 'all'}
-                onChange={() => setFilter('all')}
-              />{' '}
-              Display all
-            </label>
-            <label htmlFor="completed">
-              <input
-                className="filter-item"
-                type="radio"
-                name="filter"
-                value="all"
-                id="completed"
-                checked={filter === 'completed'}
-                onChange={() => setFilter('completed')}
-              />{' '}
-              Display completed
-            </label>
-            <label htmlFor="incomplete">
-              <input
-                className="filter-item"
-                type="radio"
-                name="filter"
-                value="all"
-                id="incomplete"
-                checked={filter === 'incomplete'}
-                onChange={() => setFilter('incomplete')}
-              />{' '}
-              Display incomplete
-            </label>
+    <>
+      <div className="wrapper">
+        <Header />
+        <div className="user-input">
+          <div className="add-task">
+            <img src={plusIcon} alt="plus-icon" />
+            <div className="input-title"> Add task</div>
+            <Textarea
+              value={inputValue}
+              onChange={(event) => setInputValue(event?.target.value)}
+              onKeyUp={(event) => handleSaveEntryOnEnter(event)}
+            />
           </div>
-          <List
-            filter={filter}
-            handleCompletedToggle={(id) => handleCompletedToggle(id)}
-            handleEditItem={(id, newTitle) => handleEditItem(id, newTitle)}
-            handleDeleteItem={(id) => handleDeleteItem(id)}
-            handleSetDueDate={(id, dueDate) => handleSetDueDate(id, dueDate)}
-          />
+          <Button onClick={handleSaveEntry}>Save entry</Button>
         </div>
-      )}
-    </div>
+        <hr />
+        <Statistics />
+        {todos && todos.length > 0 && (
+          <div className="list-item">
+            <div className="filters">
+              <label htmlFor="all">
+                <input
+                  className="filter-item"
+                  type="radio"
+                  name="filter"
+                  value="all"
+                  id="all"
+                  checked={filter === 'all'}
+                  onChange={() => setFilter('all')}
+                />{' '}
+                Display all
+              </label>
+              <label htmlFor="completed">
+                <input
+                  className="filter-item"
+                  type="radio"
+                  name="filter"
+                  value="all"
+                  id="completed"
+                  checked={filter === 'completed'}
+                  onChange={() => setFilter('completed')}
+                />{' '}
+                Display completed
+              </label>
+              <label htmlFor="incomplete">
+                <input
+                  className="filter-item"
+                  type="radio"
+                  name="filter"
+                  value="all"
+                  id="incomplete"
+                  checked={filter === 'incomplete'}
+                  onChange={() => setFilter('incomplete')}
+                />{' '}
+                Display incomplete
+              </label>
+            </div>
+            <List
+              filter={filter}
+              handleCompletedToggle={(id) => handleCompletedToggle(id)}
+              handleEditItem={(id, newTitle) => handleEditItem(id, newTitle)}
+              handleDeleteItem={(id) => handleDeleteItem(id)}
+              handleSetDueDate={(id, dueDate) => handleSetDueDate(id, dueDate)}
+            />
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
