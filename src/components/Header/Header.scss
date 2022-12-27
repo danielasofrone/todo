@@ -1,7 +1,8 @@
 @import 'breakpoints';
 
 .header-container {
-  width: 100%;
+  height: 40px;
+  top: 0;
   display: flex;
   flex-direction: row;
   float: right;
@@ -12,10 +13,10 @@
 .greeting-text {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  line-height: 20px;
+  line-height: 40px;
   margin-right: 10px;
 }
-button {
+.signout-button {
   border: none;
   background-color: #fff;
   font-family: 'Roboto', sans-serif;

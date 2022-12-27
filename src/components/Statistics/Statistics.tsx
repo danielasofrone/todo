@@ -1,8 +1,8 @@
 import './Statistics.scss';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Store } from '../../redux/reducers/index';
 import { Todo } from '../../redux/reducers/toDoReducer/types';
+import { Store } from '../../redux/reducers';
 
 interface SatisticsProps {
   todos: Todo[];
@@ -30,15 +30,17 @@ const Statistics = ({ todos }: SatisticsProps) => {
 
   return (
     <>
-      <div className="statistics-bar">
-        <div
-          className="completed-bar"
-          style={{ width: `${percentageCompleted}%` }}
-        >
-          <div className="pct">{percentageCompleted.toFixed()}%</div>
+      {!!todos.length && (
+        <div className="statistics-bar">
+          <div
+            className="completed-bar"
+            style={{ width: `${percentageCompleted}%` }}
+          >
+            <div className="pct">{percentageCompleted.toFixed()}%</div>
+          </div>
+          <div className="pct">{percentageIncomplete.toFixed()}%</div>
         </div>
-        <div className="pct">{percentageIncomplete.toFixed()}%</div>
-      </div>
+      )}
     </>
   );
 };

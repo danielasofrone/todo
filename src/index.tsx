@@ -1,15 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
-import App from './App';
-import Login from '../src/pages/Login/Login';
+import UserControl from './pages/Login/UserControl';
 import reportWebVitals from './reportWebVitals';
 import { legacy_createStore as createStore, compose } from 'redux';
 import reducers from '../src/redux/reducers';
 import { Provider } from 'react-redux';
-import { useState } from 'react';
-import { auth } from './firebase';
-import { onAuthStateChanged } from 'firebase/auth';
 
 declare global {
   interface Window {
@@ -24,24 +20,6 @@ const store = createStore(reducers, composeEnhancers());
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
-const UserControl = () => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean | undefined>(
-    undefined
-  );
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log(user);
-      setIsUserLoggedIn(true);
-    } else {
-      setIsUserLoggedIn(false);
-    }
-  });
-  if (isUserLoggedIn === undefined) return <>Loading...</>;
-
-  return isUserLoggedIn ? <App /> : <Login />;
-};
 
 root.render(
   <React.StrictMode>
